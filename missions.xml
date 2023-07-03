@@ -69,4 +69,12 @@
         <field id="27" sprayFactor="1.000000" spraySet="false" plowFactor="1.000000" state="2" vehicleGroup="8" vehicleUseCost="379.059998" growthState="8" limeFactor="1.000000" weedFactor="1.000000" stubbleFactor="0.000000" fruitTypeName="SUGARBEET"/>
         <harvest sellPointPlaceableId="21" unloadingStationIndex="1" expectedLiters="213619.250000" depositedLiters="0.000000"/>
     </mission>
+    <mission type="harvest" reward="1000.000000" status="1" success="false">
+        <field id="12" sprayFactor="1.000000" spraySet="false" plowFactor="1.000000" state="2" vehicleGroup="8" vehicleUseCost="379.059998" growthState="8" limeFactor="1.000000" weedFactor="1.000000" stubbleFactor="0.000000" fruitTypeName="SUGARBEET"/>
+        <harvest sellPointPlaceableId="21" unloadingStationIndex="1" expectedLiters="213619.250000" depositedLiters="0.000000"/>
+    </mission>
+    <mission type="harvest" reward="13.000000" status="1" success="false">
+        <field id="11" sprayFactor="1.000000" spraySet="false" plowFactor="1.000000" state="2" vehicleGroup="8" vehicleUseCost="379.059998" growthState="8" limeFactor="1.000000" weedFactor="1.000000" stubbleFactor="0.000000" fruitTypeName="PATATO"/>
+        <harvest sellPointPlaceableId="21" unloadingStationIndex="1" expectedLiters="213619.250000" depositedLiters="0.000000"/>
+    </mission>
 </missions>
