@@ -56,7 +56,7 @@ int main()
         missionAdder(saveGameDir);
         break;
     case 2:
-        changePlannedFruit();
+        changePlannedFruit(saveGameDir);
         break;
     default:
         break;
@@ -88,7 +88,7 @@ void missionAdder(char saveGameDir[])
     fclose(file);
 }
 
-void changePlannedFruit()
+void changePlannedFruit(char saveGameDir[])
 {
 
 }
