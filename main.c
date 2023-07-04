@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <dirent.h>
 #include <stdlib.h>
+#include <stdbool.h>
+
+#define MAX_LINE 2048
 
 void missionAdder();
 void changePlannedFruit();
@@ -41,8 +44,7 @@ int main()
     scanf("%d",&saveGame);
 
     char saveGameDir[strlen(gameDir)+11];
-    sprintf(saveGameDir,"%s\\savegame%d\\missions.xml",gameDir,saveGame);
-
+    char save[strlen(gameDir) + 11];
 
     int select;
     printf("1- Add Mission\n");
@@ -53,10 +55,13 @@ int main()
     switch (select)
     {
     case 1:
+        sprintf(saveGameDir,"%s\\savegame%d\\missions.xml",gameDir,saveGame);
         missionAdder(saveGameDir);
         break;
     case 2:
-        changePlannedFruit(saveGameDir);
+        sprintf(save,"%s\\savegame%d\\",gameDir,saveGame);
+        sprintf(saveGameDir,"%s\\savegame%d\\fields.xml",gameDir,saveGame);
+        changePlannedFruit(saveGameDir,save,"fields.xml");
         break;
     default:
         break;
@@ -88,7 +93,60 @@ void missionAdder(char saveGameDir[])
     fclose(file);
 }
 
-void changePlannedFruit(char saveGameDir[])
+void changePlannedFruit(char saveGameDir[],char save[],char fileName[])
 {
+    char tempFileName[strlen(save) + 20];
+    strcpy(tempFileName,save);
+    strcat(tempFileName,"\\temp_");
+    strcat(tempFileName,fileName);
+
+
+
+    char buffer[MAX_LINE];
+
+    int fieldId;
+    printf("Tarla numarası giriniz: ");
+    scanf("%d",&fieldId);
+
+
+    char fruitTypeName[15];
+    printf("Meyve türünü giriniz: ");
+    scanf("%s",&fruitTypeName);
+
+    char text[50];
+    sprintf(text,"    <field id=\"%d\" plannedFruit=\"%s\"/>\n",fieldId,fruitTypeName);
+
+    fflush(stdin);
+
+    FILE *file;
+    FILE *temp;
+
+    file = fopen(saveGameDir,"r");
+    temp = fopen(tempFileName,"w");
+
+    bool keep_reading = true;
+    int current_line = 1;
+    
+    do
+    {
+        fgets(buffer,200,file);
+
+        if(feof(file))
+            keep_reading = false;
+        else if (current_line == fieldId + 2)
+            fputs(text,temp);
+        else 
+            fputs(buffer,temp);
+
+        current_line++;
+
+    } while (keep_reading);
+    
+    fclose(file);
+    fclose(temp);
+
+    remove(saveGameDir);
+    rename(tempFileName,saveGameDir);
+
 
 }
