@@ -114,7 +114,7 @@ void changePlannedFruit(char saveGameDir[],char save[],char fileName[])
     scanf("%s",&fruitTypeName);
 
     char text[50];
-    sprintf(text,"    <field id=\"%d\" plannedFruit=\"%s\"/>\n",fieldId,fruitTypeName);
+    sprintf(text,"    <field id=\"%d\" plannedFruit=\"%s\"/>\n",fieldId,toupper(fruitTypeName));
 
     fflush(stdin);
 
@@ -126,21 +126,19 @@ void changePlannedFruit(char saveGameDir[],char save[],char fileName[])
 
     bool keep_reading = true;
     int current_line = 1;
-    
-    do
+
+    while(!feof(file))
     {
         fgets(buffer,200,file);
 
-        if(feof(file))
-            keep_reading = false;
-        else if (current_line == fieldId + 2)
+        if (current_line == fieldId + 2)
             fputs(text,temp);
         else 
             fputs(buffer,temp);
 
         current_line++;
-
-    } while (keep_reading);
+    }
+    
     
     fclose(file);
     fclose(temp);
